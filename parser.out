@@ -1,0 +1,374 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> function
+Rule 1     function -> formula
+Rule 2     formula -> formula AND formula
+Rule 3     formula -> formula OR formula
+Rule 4     formula -> NEG formula
+Rule 5     formula -> formula ARROW formula
+Rule 6     formula -> formula BIARROW formula
+Rule 7     formula -> ATOM
+Rule 8     formula -> ( formula )
+Rule 9     formula -> KNOWLEDGE formula
+
+Terminals, with rules where they appear
+
+(                    : 8
+)                    : 8
+AND                  : 2
+ARROW                : 5
+ATOM                 : 7
+BIARROW              : 6
+KNOWLEDGE            : 9
+NEG                  : 4
+OR                   : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+formula              : 1 2 2 3 3 4 5 5 6 6 8 9
+function             : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . function
+    (1) function -> . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    function                       shift and go to state 1
+    formula                        shift and go to state 2
+
+state 1
+
+    (0) S' -> function .
+
+
+
+state 2
+
+    (1) function -> formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    $end            reduce using rule 1 (function -> formula .)
+    AND             shift and go to state 7
+    OR              shift and go to state 8
+    ARROW           shift and go to state 9
+    BIARROW         shift and go to state 10
+
+
+state 3
+
+    (4) formula -> NEG . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 11
+
+state 4
+
+    (7) formula -> ATOM .
+
+    AND             reduce using rule 7 (formula -> ATOM .)
+    OR              reduce using rule 7 (formula -> ATOM .)
+    ARROW           reduce using rule 7 (formula -> ATOM .)
+    BIARROW         reduce using rule 7 (formula -> ATOM .)
+    $end            reduce using rule 7 (formula -> ATOM .)
+    )               reduce using rule 7 (formula -> ATOM .)
+
+
+state 5
+
+    (8) formula -> ( . formula )
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 12
+
+state 6
+
+    (9) formula -> KNOWLEDGE . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 13
+
+state 7
+
+    (2) formula -> formula AND . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 14
+
+state 8
+
+    (3) formula -> formula OR . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 15
+
+state 9
+
+    (5) formula -> formula ARROW . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 16
+
+state 10
+
+    (6) formula -> formula BIARROW . formula
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE formula
+
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 17
+
+state 11
+
+    (4) formula -> NEG formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 4 (formula -> NEG formula .)
+    OR              reduce using rule 4 (formula -> NEG formula .)
+    ARROW           reduce using rule 4 (formula -> NEG formula .)
+    BIARROW         reduce using rule 4 (formula -> NEG formula .)
+    $end            reduce using rule 4 (formula -> NEG formula .)
+    )               reduce using rule 4 (formula -> NEG formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 12
+
+    (8) formula -> ( formula . )
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    )               shift and go to state 18
+    AND             shift and go to state 7
+    OR              shift and go to state 8
+    ARROW           shift and go to state 9
+    BIARROW         shift and go to state 10
+
+
+state 13
+
+    (9) formula -> KNOWLEDGE formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    OR              reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    ARROW           reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    BIARROW         reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    $end            reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    )               reduce using rule 9 (formula -> KNOWLEDGE formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 14
+
+    (2) formula -> formula AND formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 2 (formula -> formula AND formula .)
+    OR              reduce using rule 2 (formula -> formula AND formula .)
+    ARROW           reduce using rule 2 (formula -> formula AND formula .)
+    BIARROW         reduce using rule 2 (formula -> formula AND formula .)
+    $end            reduce using rule 2 (formula -> formula AND formula .)
+    )               reduce using rule 2 (formula -> formula AND formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 15
+
+    (3) formula -> formula OR formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 3 (formula -> formula OR formula .)
+    OR              reduce using rule 3 (formula -> formula OR formula .)
+    ARROW           reduce using rule 3 (formula -> formula OR formula .)
+    BIARROW         reduce using rule 3 (formula -> formula OR formula .)
+    $end            reduce using rule 3 (formula -> formula OR formula .)
+    )               reduce using rule 3 (formula -> formula OR formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 16
+
+    (5) formula -> formula ARROW formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 5 (formula -> formula ARROW formula .)
+    OR              reduce using rule 5 (formula -> formula ARROW formula .)
+    ARROW           reduce using rule 5 (formula -> formula ARROW formula .)
+    BIARROW         reduce using rule 5 (formula -> formula ARROW formula .)
+    $end            reduce using rule 5 (formula -> formula ARROW formula .)
+    )               reduce using rule 5 (formula -> formula ARROW formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 17
+
+    (6) formula -> formula BIARROW formula .
+    (2) formula -> formula . AND formula
+    (3) formula -> formula . OR formula
+    (5) formula -> formula . ARROW formula
+    (6) formula -> formula . BIARROW formula
+
+    AND             reduce using rule 6 (formula -> formula BIARROW formula .)
+    OR              reduce using rule 6 (formula -> formula BIARROW formula .)
+    ARROW           reduce using rule 6 (formula -> formula BIARROW formula .)
+    BIARROW         reduce using rule 6 (formula -> formula BIARROW formula .)
+    $end            reduce using rule 6 (formula -> formula BIARROW formula .)
+    )               reduce using rule 6 (formula -> formula BIARROW formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! ARROW           [ shift and go to state 9 ]
+  ! BIARROW         [ shift and go to state 10 ]
+
+
+state 18
+
+    (8) formula -> ( formula ) .
+
+    AND             reduce using rule 8 (formula -> ( formula ) .)
+    OR              reduce using rule 8 (formula -> ( formula ) .)
+    ARROW           reduce using rule 8 (formula -> ( formula ) .)
+    BIARROW         reduce using rule 8 (formula -> ( formula ) .)
+    $end            reduce using rule 8 (formula -> ( formula ) .)
+    )               reduce using rule 8 (formula -> ( formula ) .)
+
