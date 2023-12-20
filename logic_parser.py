@@ -16,9 +16,10 @@ class Logic_Parser(object):
 
     def p_function(self, p):
         'function : formula'
-        p[0] = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\treturn" + p[1]
+        function = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\treturn" + p[1]
         self.funcNum += 1
-        exec(p[0])
+        exec(function, globals())
+        p[0] = globals()["generatedFunctionName" + str(self.funcNum - 1)]
 
     #def p_formula_knowledge_world(self, p):
     #    'formula : KNOWLEDGE_WORLD'
@@ -60,12 +61,39 @@ class Logic_Parser(object):
         '''formula : '(' formula ')' '''
         p[0] = " (" + p[2] + ")"
 
+    def p_formula_knowledge_general_atom_and(self, p):
+        '''formula : KNOWLEDGE '(' GENERAL_ATOM AND GENERAL_ATOM ')' '''
+        assert p[3] != p[5]; "Syntax Error! Sentences with the same generic atoms are not allowed. For example this is not allowed: Kp ( x & x )"
+        function = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\treturn len(world.relations_"
+        if p[1][1] == 'p':
+            function += "P) <= 1"
+        else:
+            function += "S) <= 1"
+        p[0] = " generatedFunctionName" + str(self.funcNum) + "(world, worlds)"
+        self.funcNum += 1
+        exec(function, globals())
+
+    def p_formula_knowledge_general_atom(self, p):
+        '''formula : KNOWLEDGE GENERAL_ATOM '''
+
+        function = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\tfor worldCoords in world.relations_"
+        if p[1][1] == 'p':
+            function += "P:"
+        else:
+            function += "S:"
+        function += "\n\t\tif worlds[worldCoords]." + p[2] + " == world." + p[2] + ":"
+        function += "\n\t\t\treturn False"
+        function += "\n\treturn True"
+        p[0] = " generatedFunctionName" + str(self.funcNum) + "(world, worlds)"
+        self.funcNum += 1
+        exec(function, globals())
+
     def p_formula_knowledge(self, p):
         '''formula : KNOWLEDGE formula '''
         preFunction = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\treturn" + p[2]
         self.funcNum += 1
-        exec(preFunction)
-
+        exec(preFunction, globals())
+        
         function = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\tfor worldCoords in world.relations_" 
         if p[1][1] == 'p':
             function += "P:"
@@ -76,7 +104,7 @@ class Logic_Parser(object):
         function += "\n\treturn True"
         p[0] = " generatedFunctionName" + str(self.funcNum) + "(world, worlds)"
         self.funcNum += 1
-        exec(function)
+        exec(function, globals())
 
     # Error rule for syntax errors
     def p_error(self, p):

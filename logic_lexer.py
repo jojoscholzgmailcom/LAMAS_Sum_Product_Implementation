@@ -12,7 +12,7 @@ class Logic_Lexer(object):
         'ARROW',
         'BIARROW',
         'KNOWLEDGE',
-        'GENERAL'#TODO: Work on this
+        'GENERAL_ATOM'
     )
 
     # Regular expression rules for tokens
@@ -24,6 +24,7 @@ class Logic_Lexer(object):
     t_NEG  = r'-'
     t_KNOWLEDGE  = r'K[ps]'
     t_ATOM  = r'[xy][0-9]+'
+    t_GENERAL_ATOM = r'[xy]'
 
     # A string containing ignored characters (whitespaces)
     t_ignore  = ' \t'

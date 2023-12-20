@@ -11,24 +11,27 @@ Rule 5     formula -> formula ARROW formula
 Rule 6     formula -> formula BIARROW formula
 Rule 7     formula -> ATOM
 Rule 8     formula -> ( formula )
-Rule 9     formula -> KNOWLEDGE formula
+Rule 9     formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+Rule 10    formula -> KNOWLEDGE GENERAL_ATOM
+Rule 11    formula -> KNOWLEDGE formula
 
 Terminals, with rules where they appear
 
-(                    : 8
-)                    : 8
-AND                  : 2
+(                    : 8 9
+)                    : 8 9
+AND                  : 2 9
 ARROW                : 5
 ATOM                 : 7
 BIARROW              : 6
-KNOWLEDGE            : 9
+GENERAL_ATOM         : 9 9 10
+KNOWLEDGE            : 9 10 11
 NEG                  : 4
 OR                   : 3
 error                : 
 
 Nonterminals, with rules where they appear
 
-formula              : 1 2 2 3 3 4 5 5 6 6 8 9
+formula              : 1 2 2 3 3 4 5 5 6 6 8 11
 function             : 0
 
 Parsing method: LALR
@@ -44,7 +47,9 @@ state 0
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
@@ -85,7 +90,9 @@ state 3
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
@@ -116,7 +123,9 @@ state 5
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
@@ -127,7 +136,9 @@ state 5
 
 state 6
 
-    (9) formula -> KNOWLEDGE . formula
+    (9) formula -> KNOWLEDGE . ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> KNOWLEDGE . GENERAL_ATOM
+    (11) formula -> KNOWLEDGE . formula
     (2) formula -> . formula AND formula
     (3) formula -> . formula OR formula
     (4) formula -> . NEG formula
@@ -135,14 +146,17 @@ state 6
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
+    (               shift and go to state 13
+    GENERAL_ATOM    shift and go to state 14
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
-    (               shift and go to state 5
     KNOWLEDGE       shift and go to state 6
 
-    formula                        shift and go to state 13
+    formula                        shift and go to state 15
 
 state 7
 
@@ -154,14 +168,16 @@ state 7
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
     (               shift and go to state 5
     KNOWLEDGE       shift and go to state 6
 
-    formula                        shift and go to state 14
+    formula                        shift and go to state 16
 
 state 8
 
@@ -173,14 +189,16 @@ state 8
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
     (               shift and go to state 5
     KNOWLEDGE       shift and go to state 6
 
-    formula                        shift and go to state 15
+    formula                        shift and go to state 17
 
 state 9
 
@@ -192,14 +210,16 @@ state 9
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
     (               shift and go to state 5
     KNOWLEDGE       shift and go to state 6
 
-    formula                        shift and go to state 16
+    formula                        shift and go to state 18
 
 state 10
 
@@ -211,14 +231,16 @@ state 10
     (6) formula -> . formula BIARROW formula
     (7) formula -> . ATOM
     (8) formula -> . ( formula )
-    (9) formula -> . KNOWLEDGE formula
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
 
     NEG             shift and go to state 3
     ATOM            shift and go to state 4
     (               shift and go to state 5
     KNOWLEDGE       shift and go to state 6
 
-    formula                        shift and go to state 17
+    formula                        shift and go to state 19
 
 state 11
 
@@ -249,7 +271,7 @@ state 12
     (5) formula -> formula . ARROW formula
     (6) formula -> formula . BIARROW formula
 
-    )               shift and go to state 18
+    )               shift and go to state 20
     AND             shift and go to state 7
     OR              shift and go to state 8
     ARROW           shift and go to state 9
@@ -258,18 +280,53 @@ state 12
 
 state 13
 
-    (9) formula -> KNOWLEDGE formula .
+    (9) formula -> KNOWLEDGE ( . GENERAL_ATOM AND GENERAL_ATOM )
+    (8) formula -> ( . formula )
+    (2) formula -> . formula AND formula
+    (3) formula -> . formula OR formula
+    (4) formula -> . NEG formula
+    (5) formula -> . formula ARROW formula
+    (6) formula -> . formula BIARROW formula
+    (7) formula -> . ATOM
+    (8) formula -> . ( formula )
+    (9) formula -> . KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )
+    (10) formula -> . KNOWLEDGE GENERAL_ATOM
+    (11) formula -> . KNOWLEDGE formula
+
+    GENERAL_ATOM    shift and go to state 21
+    NEG             shift and go to state 3
+    ATOM            shift and go to state 4
+    (               shift and go to state 5
+    KNOWLEDGE       shift and go to state 6
+
+    formula                        shift and go to state 12
+
+state 14
+
+    (10) formula -> KNOWLEDGE GENERAL_ATOM .
+
+    AND             reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+    OR              reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+    ARROW           reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+    BIARROW         reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+    $end            reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+    )               reduce using rule 10 (formula -> KNOWLEDGE GENERAL_ATOM .)
+
+
+state 15
+
+    (11) formula -> KNOWLEDGE formula .
     (2) formula -> formula . AND formula
     (3) formula -> formula . OR formula
     (5) formula -> formula . ARROW formula
     (6) formula -> formula . BIARROW formula
 
-    AND             reduce using rule 9 (formula -> KNOWLEDGE formula .)
-    OR              reduce using rule 9 (formula -> KNOWLEDGE formula .)
-    ARROW           reduce using rule 9 (formula -> KNOWLEDGE formula .)
-    BIARROW         reduce using rule 9 (formula -> KNOWLEDGE formula .)
-    $end            reduce using rule 9 (formula -> KNOWLEDGE formula .)
-    )               reduce using rule 9 (formula -> KNOWLEDGE formula .)
+    AND             reduce using rule 11 (formula -> KNOWLEDGE formula .)
+    OR              reduce using rule 11 (formula -> KNOWLEDGE formula .)
+    ARROW           reduce using rule 11 (formula -> KNOWLEDGE formula .)
+    BIARROW         reduce using rule 11 (formula -> KNOWLEDGE formula .)
+    $end            reduce using rule 11 (formula -> KNOWLEDGE formula .)
+    )               reduce using rule 11 (formula -> KNOWLEDGE formula .)
 
   ! AND             [ shift and go to state 7 ]
   ! OR              [ shift and go to state 8 ]
@@ -277,7 +334,7 @@ state 13
   ! BIARROW         [ shift and go to state 10 ]
 
 
-state 14
+state 16
 
     (2) formula -> formula AND formula .
     (2) formula -> formula . AND formula
@@ -298,7 +355,7 @@ state 14
   ! BIARROW         [ shift and go to state 10 ]
 
 
-state 15
+state 17
 
     (3) formula -> formula OR formula .
     (2) formula -> formula . AND formula
@@ -319,7 +376,7 @@ state 15
   ! BIARROW         [ shift and go to state 10 ]
 
 
-state 16
+state 18
 
     (5) formula -> formula ARROW formula .
     (2) formula -> formula . AND formula
@@ -340,7 +397,7 @@ state 16
   ! BIARROW         [ shift and go to state 10 ]
 
 
-state 17
+state 19
 
     (6) formula -> formula BIARROW formula .
     (2) formula -> formula . AND formula
@@ -361,7 +418,7 @@ state 17
   ! BIARROW         [ shift and go to state 10 ]
 
 
-state 18
+state 20
 
     (8) formula -> ( formula ) .
 
@@ -371,4 +428,37 @@ state 18
     BIARROW         reduce using rule 8 (formula -> ( formula ) .)
     $end            reduce using rule 8 (formula -> ( formula ) .)
     )               reduce using rule 8 (formula -> ( formula ) .)
+
+
+state 21
+
+    (9) formula -> KNOWLEDGE ( GENERAL_ATOM . AND GENERAL_ATOM )
+
+    AND             shift and go to state 22
+
+
+state 22
+
+    (9) formula -> KNOWLEDGE ( GENERAL_ATOM AND . GENERAL_ATOM )
+
+    GENERAL_ATOM    shift and go to state 23
+
+
+state 23
+
+    (9) formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM . )
+
+    )               shift and go to state 24
+
+
+state 24
+
+    (9) formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .
+
+    AND             reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
+    OR              reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
+    ARROW           reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
+    BIARROW         reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
+    $end            reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
+    )               reduce using rule 9 (formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM ) .)
 
