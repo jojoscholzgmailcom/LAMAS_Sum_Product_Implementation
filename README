@@ -1,0 +1,10 @@
+Sum and Product Puzzle
+An implementation of a solver for the Sum and Product Puzzle, with the capability to give some hints if the user wants to solve the puzzle themselves.
+
+How to run:
+
+1. Have python installed / install python (we used version 3.11.6, so try this one if other versions do not work) (check version in command lined using python --version)
+2. Have pip installed / install it (we used version 23.3.2, optionally check with pip --version in the command line)
+3. Use pip to install the python library ply (use "pip install ply" in the command line to install)
+4. Open the command line in the folder this file is in then run the command "python parse_test.py"
+5. Follow instructions of command line

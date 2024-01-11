@@ -1,5 +1,6 @@
 import ply.lex as lex
 
+# Tokenizes the input, which can then be used by the parser
 class Logic_Lexer(object):
     literals = [ '(',')' ]
 
@@ -16,7 +17,6 @@ class Logic_Lexer(object):
     )
 
     # Regular expression rules for tokens
-    #t_KNOWLEDGE_WORLD  = r'K[ps]\s*x[0-9]+\s*&\s*y[0-9]+\n|K[ps]\s*y[0-9]+\s*&\s*x[0-9]+\n'
     t_AND    = r'&'
     t_OR     = r'\|'
     t_BIARROW   = r'='
@@ -29,6 +29,7 @@ class Logic_Lexer(object):
     # A string containing ignored characters (whitespaces)
     t_ignore  = ' \t'
 
+    # Used to create the lexer
     def build(self,**kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
 

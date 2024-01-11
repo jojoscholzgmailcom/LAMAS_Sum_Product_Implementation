@@ -2,6 +2,7 @@ import ply.yacc as yacc
 import ply.lex as lex
 from logic_lexer import Logic_Lexer
 
+# Used to translate logic statements to python functions
 class Logic_Parser(object):
 
     def __init__(self):
@@ -14,6 +15,7 @@ class Logic_Parser(object):
         ('right', 'NEG'),
     )
 
+    # Returns a python function that returns a boolean and accepts a world and a dictionary of worlds
     def p_function(self, p):
         'function : formula'
         function = "def generatedFunctionName" + str(self.funcNum) + "(world, worlds):\n\treturn" + p[1]

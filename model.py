@@ -1,5 +1,6 @@
 from typing import Callable
 
+# Stores the two numbers that are valid in this world
 class World:
 
     def __init__(self, x: int, y: int) -> None:
@@ -10,6 +11,7 @@ class World:
         self.relations_S = []
         self.relations_P = []
 
+# Stores all currently considered worlds
 class Kripke_Model:
 
     # The range minNumber to maxNumber is inclusive on both ends
@@ -23,7 +25,7 @@ class Kripke_Model:
         self.pWorlds = {}
         self.sWorlds = {}
 
-        # Add the appropriate relations between worlds
+        # Add the appropriate worlds and relations between worlds
         self._generateWorlds()
         self._generateRelations()
 
@@ -31,12 +33,18 @@ class Kripke_Model:
         for x in range(self.minNumber, self.maxNumber + 1):
             for y in range(self.minNumber, self.maxNumber + 1):
                 valid_world = True
+
+                # Check whether the world is in accordance with all initial constraints
                 for constraint in self.constraints:
                     valid_world = valid_world and constraint(x, y)
                     if not valid_world:
                         break
+                
                 if valid_world:
+                    # Add the valid to the dictionary of worlds
                     self.worlds[(x,y)] = World(x,y)
+
+                    # Group Worlds with the same Sums or Products
                     pWorld = self.pWorlds.get(x*y, set())
                     pWorld.add((x,y))
                     sWorld = self.sWorlds.get(x+y, set())
@@ -47,17 +55,20 @@ class Kripke_Model:
     # Adds Product or Sum relations if the Product/Sum is the same between them (also includes reflexive relations)
     def _generateRelations(self) -> None:
         for world in self.worlds.values():
-            #if world.product == 4:
-            #    print(world.x, world.y, self.sWorlds[world.sum], self.pWorlds[world.product])
             world.relations_S = list(self.sWorlds[world.sum])
             world.relations_P = list(self.pWorlds[world.product])
 
     # The announcement is presumed to be truthful
+    # The announcement is assumed to be a function that returns a boolean, use the logic_parser to convert logic statements to python functions
     def publicAnnouncementUpdate(self, announcement: Callable[[World, dict[tuple [int, int], World]], bool]) -> None:
         delete_worlds = []
+
+        # Mark all worlds in which that announcement is not truthful
         for world in self.worlds.values():
             if not announcement(world, self.worlds):
                 delete_worlds.append((world.x, world.y))
+
+        # Delete the worlds as well as all connections to it
         for worldNums in delete_worlds:
             world = self.worlds[worldNums]
             
@@ -71,7 +82,7 @@ class Kripke_Model:
             self.worlds.pop(worldNums)
 
     # Will evaluate the given function on either the given world or all if None is specified and
-    # will determine whether the function is true for the scope
+    # Will determine whether the function is true for the scope
     def evaluateStatement(self, statement: Callable[[World, dict[tuple [int, int], World]], bool], evaluatedWorld: tuple [int, int] | None = None) -> bool:
         if evaluatedWorld is not None:
             return statement(self.worlds[evaluatedWorld], self.worlds) 
@@ -83,7 +94,7 @@ class Kripke_Model:
 
 
 #*****************************************************************
-# Temporary functions for testing
+# Functions for testing
 
 def xSmallerEqual(x: int, y: int):
     return x <= y
