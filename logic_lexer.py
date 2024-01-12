@@ -13,7 +13,8 @@ class Logic_Lexer(object):
         'ARROW',
         'BIARROW',
         'KNOWLEDGE',
-        'GENERAL_ATOM'
+        'GENERAL_ATOM',
+        'KNOWLEDGE_EVERYONE'
     )
 
     # Regular expression rules for tokens
@@ -23,6 +24,7 @@ class Logic_Lexer(object):
     t_ARROW  = r'>'
     t_NEG  = r'-'
     t_KNOWLEDGE  = r'K[ps]'
+    t_KNOWLEDGE_EVERYONE  = r'E'
     t_ATOM  = r'[xy][0-9]+'
     t_GENERAL_ATOM = r'[xy]'
 
