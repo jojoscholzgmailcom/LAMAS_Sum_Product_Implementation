@@ -13,7 +13,7 @@ class Logic_Parser(object):
     # Further linewise ordered from least restrictive to most 
     precedence = (
         ('left', 'AND', 'OR', 'ARROW', 'BIARROW'),
-        ('left', 'KNOWLEDGE'),
+        ('left', 'KNOWLEDGE', 'KNOWLEDGE_EVERYONE'),
         ('right', 'NEG'),
     )
 

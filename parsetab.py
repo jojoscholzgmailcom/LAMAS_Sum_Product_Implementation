@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "leftANDORARROWBIARROWleftKNOWLEDGErightNEGAND ARROW ATOM BIARROW GENERAL_ATOM KNOWLEDGE NEG ORfunction : formulaformula : formula AND formulaformula : formula OR formulaformula : NEG formulaformula : formula ARROW formulaformula : formula BIARROW formulaformula : ATOMformula : '(' formula ')' formula : KNOWLEDGE '(' GENERAL_ATOM AND GENERAL_ATOM ')' formula : KNOWLEDGE GENERAL_ATOM formula : KNOWLEDGE formula "
+_lr_signature = "leftANDORARROWBIARROWleftKNOWLEDGEKNOWLEDGE_EVERYONErightNEGAND ARROW ATOM BIARROW GENERAL_ATOM KNOWLEDGE KNOWLEDGE_EVERYONE NEG ORfunction : formulaformula : formula AND formulaformula : formula OR formulaformula : NEG formulaformula : formula ARROW formulaformula : formula BIARROW formulaformula : ATOMformula : '(' formula ')' formula : KNOWLEDGE '(' GENERAL_ATOM AND GENERAL_ATOM ')' formula : KNOWLEDGE GENERAL_ATOM formula : KNOWLEDGE formula formula : KNOWLEDGE_EVERYONE formula "
     
-_lr_action_items = {'NEG':([0,3,5,6,7,8,9,10,13,],[3,3,3,3,3,3,3,3,3,]),'ATOM':([0,3,5,6,7,8,9,10,13,],[4,4,4,4,4,4,4,4,4,]),'(':([0,3,5,6,7,8,9,10,13,],[5,5,5,13,5,5,5,5,5,]),'KNOWLEDGE':([0,3,5,6,7,8,9,10,13,],[6,6,6,6,6,6,6,6,6,]),'$end':([1,2,4,11,14,15,16,17,18,19,20,24,],[0,-1,-7,-4,-10,-11,-2,-3,-5,-6,-8,-9,]),'AND':([2,4,11,12,14,15,16,17,18,19,20,21,24,],[7,-7,-4,7,-10,-11,-2,-3,-5,-6,-8,22,-9,]),'OR':([2,4,11,12,14,15,16,17,18,19,20,24,],[8,-7,-4,8,-10,-11,-2,-3,-5,-6,-8,-9,]),'ARROW':([2,4,11,12,14,15,16,17,18,19,20,24,],[9,-7,-4,9,-10,-11,-2,-3,-5,-6,-8,-9,]),'BIARROW':([2,4,11,12,14,15,16,17,18,19,20,24,],[10,-7,-4,10,-10,-11,-2,-3,-5,-6,-8,-9,]),')':([4,11,12,14,15,16,17,18,19,20,23,24,],[-7,-4,20,-10,-11,-2,-3,-5,-6,-8,24,-9,]),'GENERAL_ATOM':([6,13,22,],[14,21,23,]),}
+_lr_action_items = {'NEG':([0,3,5,6,7,8,9,10,11,14,],[3,3,3,3,3,3,3,3,3,3,]),'ATOM':([0,3,5,6,7,8,9,10,11,14,],[4,4,4,4,4,4,4,4,4,4,]),'(':([0,3,5,6,7,8,9,10,11,14,],[5,5,5,14,5,5,5,5,5,5,]),'KNOWLEDGE':([0,3,5,6,7,8,9,10,11,14,],[6,6,6,6,6,6,6,6,6,6,]),'KNOWLEDGE_EVERYONE':([0,3,5,6,7,8,9,10,11,14,],[7,7,7,7,7,7,7,7,7,7,]),'$end':([1,2,4,12,15,16,17,18,19,20,21,22,26,],[0,-1,-7,-4,-10,-11,-12,-2,-3,-5,-6,-8,-9,]),'AND':([2,4,12,13,15,16,17,18,19,20,21,22,23,26,],[8,-7,-4,8,-10,-11,-12,-2,-3,-5,-6,-8,24,-9,]),'OR':([2,4,12,13,15,16,17,18,19,20,21,22,26,],[9,-7,-4,9,-10,-11,-12,-2,-3,-5,-6,-8,-9,]),'ARROW':([2,4,12,13,15,16,17,18,19,20,21,22,26,],[10,-7,-4,10,-10,-11,-12,-2,-3,-5,-6,-8,-9,]),'BIARROW':([2,4,12,13,15,16,17,18,19,20,21,22,26,],[11,-7,-4,11,-10,-11,-12,-2,-3,-5,-6,-8,-9,]),')':([4,12,13,15,16,17,18,19,20,21,22,25,26,],[-7,-4,22,-10,-11,-12,-2,-3,-5,-6,-8,26,-9,]),'GENERAL_ATOM':([6,14,24,],[15,23,25,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'function':([0,],[1,]),'formula':([0,3,5,6,7,8,9,10,13,],[2,11,12,15,16,17,18,19,12,]),}
+_lr_goto_items = {'function':([0,],[1,]),'formula':([0,3,5,6,7,8,9,10,11,14,],[2,12,13,16,17,18,19,20,21,13,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,15 +27,16 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> function","S'",1,None,None,None),
-  ('function -> formula','function',1,'p_function','logic_parser.py',18),
-  ('formula -> formula AND formula','formula',3,'p_formula_and','logic_parser.py',36),
-  ('formula -> formula OR formula','formula',3,'p_formula_or','logic_parser.py',40),
-  ('formula -> NEG formula','formula',2,'p_formula_not','logic_parser.py',44),
-  ('formula -> formula ARROW formula','formula',3,'p_formula_arrow','logic_parser.py',48),
-  ('formula -> formula BIARROW formula','formula',3,'p_formula_biarrow','logic_parser.py',52),
-  ('formula -> ATOM','formula',1,'p_formula_atom','logic_parser.py',56),
-  ('formula -> ( formula )','formula',3,'p_formula_paranthesis','logic_parser.py',60),
-  ('formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )','formula',6,'p_formula_knowledge_general_atom_and','logic_parser.py',64),
-  ('formula -> KNOWLEDGE GENERAL_ATOM','formula',2,'p_formula_knowledge_general_atom','logic_parser.py',73),
-  ('formula -> KNOWLEDGE formula','formula',2,'p_formula_knowledge','logic_parser.py',88),
+  ('function -> formula','function',1,'p_function','logic_parser.py',22),
+  ('formula -> formula AND formula','formula',3,'p_formula_and','logic_parser.py',30),
+  ('formula -> formula OR formula','formula',3,'p_formula_or','logic_parser.py',34),
+  ('formula -> NEG formula','formula',2,'p_formula_not','logic_parser.py',38),
+  ('formula -> formula ARROW formula','formula',3,'p_formula_arrow','logic_parser.py',42),
+  ('formula -> formula BIARROW formula','formula',3,'p_formula_biarrow','logic_parser.py',46),
+  ('formula -> ATOM','formula',1,'p_formula_atom','logic_parser.py',51),
+  ('formula -> ( formula )','formula',3,'p_formula_paranthesis','logic_parser.py',55),
+  ('formula -> KNOWLEDGE ( GENERAL_ATOM AND GENERAL_ATOM )','formula',6,'p_formula_knowledge_general_atom_and','logic_parser.py',59),
+  ('formula -> KNOWLEDGE GENERAL_ATOM','formula',2,'p_formula_knowledge_general_atom','logic_parser.py',72),
+  ('formula -> KNOWLEDGE formula','formula',2,'p_formula_knowledge','logic_parser.py',86),
+  ('formula -> KNOWLEDGE_EVERYONE formula','formula',2,'p_formula_knowledge_everyone','logic_parser.py',104),
 ]
